@@ -38,11 +38,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
 #---------------- TRAIN THE MODEL ----------------#
 # Instatiating Object of LinearRegression Class
-#when "fit_intercept = True" - asking the model to obtain intercept which is value of 'm' and 'b'
-#when "fit_intercept = False" - model will obtain only the 'm' value; 'b' will be zero by default
+'''
+fit_intercept:
+True - Model decides slope 'm' and intercept 'b'
+False - Model decides slope 'm' and intercept 'b' is zero by defaut
+'''
+
 regressor = LinearRegression(fit_intercept =True)
 regressor.fit(X_train,y_train)
-
 print('Linear Model slope (m): ', regressor.coef_)
 print('Linear Model intercept (b): ', regressor.intercept_)
 
@@ -58,7 +61,8 @@ plt.xlabel('Temperature [degC]')
 plt.title('Revenue Generated vs. Temperature @Ice Cream Stand(Training dataset)')
 plt.show()
 
-# Visualise the Test Results
+
+#---------------- VISUALIZE TEST DATA ----------------#
 plt.scatter(X_test, y_test, color = 'red')
 plt.plot(X_test, regressor.predict(X_test), color = 'blue')
 plt.ylabel('Revenue [dollars]')
@@ -66,5 +70,9 @@ plt.xlabel('Hours')
 plt.title('Revenue Generated vs. Hours @Ice Cream Stand(Test dataset)')
 plt.show()
 
-y_predict = regressor.predict(np.asarray([30]).reshape(-1, 1))
+
+#---------------- PREDICT DATA ----------------#
+x_predict = 20
+y_predict = regressor.predict(np.asarray([x_predict]).reshape(-1, 1))
+print('Data Predicted on: ', x_predict)
 print('Predicted Data: ', y_predict)
